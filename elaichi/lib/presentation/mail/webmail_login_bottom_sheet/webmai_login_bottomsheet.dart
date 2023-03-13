@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:elaichi/domain/repositories/user_repository.dart';
 import 'package:elaichi/presentation/components/bottom_sheet/bottom_sheet.dart';
 import 'package:elaichi/presentation/components/buttons/blue_button.dart';
@@ -41,10 +43,19 @@ class _WebMailLoginBottomSheetState extends State<WebMailLoginBottomSheet> {
           state.maybeWhen(
             orElse: () {},
             error: (error) {
-              _toastUtil.showToast(
-                mode: ToastMode.Error,
-                title: error,
-              );
+              if(error.contains("Unique constraint failed on the constraint: `User_mobile_key`") && error.contains("Invalid `prisma.user.create()`")) {
+                log('error is : $error');
+                _toastUtil.showToast(
+                  mode: ToastMode.Error,
+                  title: "Mobile number already registered",
+                );
+              } else {
+                log('error is : $error');
+                _toastUtil.showToast(
+                  mode: ToastMode.Error,
+                  title: error,
+                );
+              }
               Navigator.pop(context);
             },
             success: () {

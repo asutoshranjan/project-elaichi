@@ -193,8 +193,8 @@ class _RegistrationDetailsState extends State<RegistrationDetails> {
                   const CustomBackButton(),
                   const SizedBox(height: 16),
                   Text(
-                    'Fest Registration',
-                    style: interTextTheme.headline2,
+                    'Register with a Mobile Number',
+                    style: interTextTheme.headline2!.copyWith(fontSize: 22),
                   ),
                   const SizedBox(height: 24),
                   Form(
